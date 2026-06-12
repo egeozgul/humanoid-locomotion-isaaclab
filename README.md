@@ -27,6 +27,26 @@ Training a PPO locomotion policy for the [Unitree H1](https://www.unitree.com/h1
 
 ---
 
+## Training Curves
+
+**Mean Reward**
+
+![Mean Reward](plots/mean_reward.png)
+
+**Terrain Level (Curriculum)**
+
+![Terrain Level](plots/terrain_level.png)
+
+**Fall Rate**
+
+![Fall Rate](plots/fall_rate.png)
+
+**Reward Term Breakdown**
+
+![Reward Breakdown](plots/reward_breakdown.png)
+
+---
+
 ## Comparison with Quadruped (Anymal C)
 
 Training both quadruped and humanoid locomotion policies with the same Isaac Lab framework reveals key differences between bipedal and quadrupedal locomotion:
