@@ -41,9 +41,6 @@ Training a PPO locomotion policy for the [Unitree H1](https://www.unitree.com/h1
 
 ![Fall Rate](plots/fall_rate.png)
 
-**Reward Term Breakdown**
-
-![Reward Breakdown](plots/reward_breakdown.png)
 
 ---
 
