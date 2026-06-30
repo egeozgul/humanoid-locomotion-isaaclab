@@ -48,7 +48,6 @@ Training a PPO locomotion policy for the [Unitree H1](https://www.unitree.com/h1
 ---
 
 ## Comparison with Quadruped (Anymal C)
-
 Training both quadruped and humanoid locomotion policies with the same Isaac Lab framework reveals key differences between bipedal and quadrupedal locomotion:
 
 | Metric | Anymal C (Quadruped) | H1 (Humanoid) |
@@ -59,7 +58,7 @@ Training both quadruped and humanoid locomotion policies with the same Isaac Lab
 | Velocity tracking error | 0.33 m/s | **0.24 m/s** |
 | Episode survival | 84% | **99.26%** |
 
-The H1 policy achieves significantly higher reward and lower fall rate than the Anymal C baseline. This is largely due to the H1 config having a richer reward function (14 terms vs 11) including a large termination penalty (-200), feet slide penalty, and joint deviation terms that collectively produce more stable and efficient locomotion. The quadruped reaches a slightly higher terrain curriculum level (5.98 vs 5.76), consistent with the inherent stability advantage of four-legged locomotion.
+The H1 policy achieves significantly higher reward and a much lower fall rate than the Anymal C baseline. The H1 config adds a termination penalty (-200), feet slide penalty, and joint deviation terms on top of the standard reward base that Anymal C uses unmodified — the termination penalty in particular likely drives most of the fall rate improvement. Since morphology also differs between the two robots, this isn't a fully controlled comparison, so the relative contribution of reward design versus inherent bipedal vs quadrupedal stability can't be fully disentangled. The quadruped does reach a slightly higher terrain curriculum level (5.98 vs 5.76), consistent with the wider support polygon a four-legged stance provides.
 
 ---
 
