@@ -45,6 +45,11 @@ Training a PPO locomotion policy for the [Unitree H1](https://www.unitree.com/h1
 
 ![Reward Breakdown](plots/reward_breakdown.png)
 
+*Note: Vertical Vel Penalty and Undesired Contacts appear empty because these 
+terms are not included in the H1 reward configuration (set to `None`). Torque 
+Penalty appears flat at zero due to its very small weight relative to other 
+terms, not because torque usage was zero.*
+
 ---
 
 ## Comparison with Quadruped (Anymal C)
