@@ -45,10 +45,11 @@ Training a PPO locomotion policy for the [Unitree H1](https://www.unitree.com/h1
 
 ![Reward Breakdown](plots/reward_breakdown.png)
 
-*Note: Vertical Vel Penalty and Undesired Contacts appear empty because these 
-terms are not included in the H1 reward configuration (set to `None`). Torque 
-Penalty appears flat at zero due to its very small weight relative to other 
-terms, not because torque usage was zero.*
+*Note: Vertical Vel Penalty and Undesired Contacts are absent because 
+these terms are explicitly removed from the reward config (`= None`). 
+Torque Penalty appears flat at exactly zero because its weight is 
+explicitly set to `0.0` — energy efficiency was not optimized for in 
+this policy, not because torque usage was actually zero.*
 
 ---
 
@@ -68,19 +69,24 @@ The H1 policy achieves significantly higher reward and a much lower fall rate th
 ---
 
 ## Reward Structure
-
-The H1 config uses 14 reward terms designed for bipedal stability:
-
+The H1 config uses 12 active reward terms (plus 2 explicitly disabled/removed) designed for bipedal stability:
 | Term | Weight | Purpose |
 |------|--------|---------|
+| termination_penalty | -200.0 | Strong fall discouragement |
 | track_lin_vel_xy_exp | 1.0 | Forward/lateral velocity tracking |
 | track_ang_vel_z_exp | 1.0 | Yaw rate tracking |
-| termination_penalty | -200.0 | Strong fall discouragement |
-| flat_orientation_l2 | -1.0 | Upright posture |
+| feet_air_time | 0.25 | Proper swing phase timing |
 | feet_slide | -0.25 | Stable foot contact |
+| dof_pos_limits | -1.0 | Ankle joint limit avoidance |
 | joint_deviation_hip | -0.2 | Natural hip posture |
 | joint_deviation_arms | -0.2 | Natural arm posture |
-| dof_pos_limits | -1.0 | Joint limit avoidance |
+| joint_deviation_torso | -0.1 | Natural torso posture |
+| flat_orientation_l2 | -1.0 | Upright posture |
+| action_rate_l2 | -0.005 | Smooth action changes |
+| dof_acc_l2 | -1.25e-7 | Smooth joint acceleration |
+| dof_torques_l2 | 0.0 | *Disabled* — no energy/efficiency penalty |
+| lin_vel_z_l2 | *None* | *Removed* — not used in H1 config |
+| undesired_contacts | *None* | *Removed* — not used in H1 config |
 
 ---
 
